@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import { ItemType } from '../../types/item';
 import { Settings, SETTINGS_DEFAULT, } from '../../types/settings';
-import FormData from '../form-data/form-data';
-import ItemList from '../item-list/item-list';
+import FormSettings from '../form-settings/form-settings';
 import FormPrint from '../form-print/form-print';
+import { Job } from '../../types/job';
+import FormJob from '../form-job/form-job';
 
 const App: React.FunctionComponent = () => {
 
-  const [printedItems, setPrintedItems] = useState('');
-  const [printedFormActive, setPrintedFormActive] = useState(false);
-  const [items, setItems] = useState<ItemType[]>([]);
+  const [job, setJob] = useState<Job>({
+    isExtraMargin: false,
+    items: []
+  });
   const [settings, setSettings] = useState<Settings>(SETTINGS_DEFAULT);
-  const [extraMarginActive, setExtraMarginActive] = useState(false);
 
   return (
     <>
@@ -19,28 +19,17 @@ const App: React.FunctionComponent = () => {
       </header>
       <main>
         <h1>InnerWorkings</h1>
-        <FormData
+        <FormSettings
           settings={settings}
           setSetting={setSettings}
-          printedFormActive={printedFormActive}
-          setPrintedFormActive={setPrintedFormActive}
         />
-        <ItemList
-          items={items}
-          setItems={setItems}
-          setPrintedItems={setPrintedItems}
-          printedFormActive={printedFormActive}
-          setPrintedFormActive={setPrintedFormActive}
-          extraMarginActive={extraMarginActive}
-          setExtraMarginActive={setExtraMarginActive}
+        <FormJob
+          job={job}
+          setJob={setJob}
         />
         <FormPrint
-          items={items}
+          job={job}
           settings={settings}
-          printedItems={printedItems}
-          setPrintedItems={setPrintedItems}
-          printedFormActive={printedFormActive}
-          setPrintedFormActive={setPrintedFormActive}
         />
       </main>
       <footer>

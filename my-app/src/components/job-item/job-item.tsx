@@ -1,12 +1,12 @@
-import { ItemType } from '../../types/item';
+import { Item } from '../../types/item';
 
-type ItemProps = {
-  item: ItemType;
-  onDeleteButtonClick: (newValue: ItemType) => void;
-  onEditItem: (newValue: ItemType) => void;
+type JobItemProps = {
+  item: Item;
+  onDeleteButtonClick: (newValue: Item) => void;
+  onEditItem: (newValue: Item) => void;
 }
 
-const Item: React.FunctionComponent<ItemProps> = ({ item, onDeleteButtonClick, onEditItem }) => {
+const JobItem: React.FunctionComponent<JobItemProps> = ({ item, onDeleteButtonClick, onEditItem }) => {
 
   return (
     <ul>
@@ -41,4 +41,4 @@ const Item: React.FunctionComponent<ItemProps> = ({ item, onDeleteButtonClick, o
   )
 }
 
-export default Item
+export default JobItem

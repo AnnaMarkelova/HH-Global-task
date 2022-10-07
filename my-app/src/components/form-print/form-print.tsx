@@ -1,27 +1,27 @@
-import { ItemType } from '../../types/item';
+import { useEffect, useState } from 'react';
+import { Job } from '../../types/job';
 import { Settings } from '../../types/settings';
 import { printItems } from '../../utils/print';
 
 type FormPrintProps = {
-  items: ItemType[];
+  job: Job;
   settings: Settings;
-  printedItems: string;
-  setPrintedItems: (newValue: string) => void;
-  printedFormActive: boolean;
-  setPrintedFormActive: (newValue: boolean) => void;
 }
 
-const FormPrint: React.FunctionComponent<FormPrintProps> = ({
-    items,
-    settings,
-    printedItems,
-    setPrintedItems,
-    printedFormActive,
-    setPrintedFormActive 
-  }) => {
+const FormPrint: React.FunctionComponent<FormPrintProps> = ({ job, settings }) => {
+
+  const [printedFormActive, setPrintedFormActive] = useState(false);
+  const [printedItems, setPrintedItems] = useState('');
+
+  useEffect(() => {
+    setPrintedFormActive(false);
+    if (!job.items.length) {
+      setPrintedItems('');
+    }
+  }, [job, settings]);
 
   const onPrintButtonClick = () => {
-    const printedItems = printItems(items, settings)
+    const printedItems = printItems(job, settings)
     setPrintedItems(printedItems);
     setPrintedFormActive(true);
   }

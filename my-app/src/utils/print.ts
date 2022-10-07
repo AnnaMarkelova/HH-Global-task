@@ -1,16 +1,19 @@
-import { ItemType } from "../types/item";
+import { Job } from "../types/job";
 import { Settings } from "../types/settings";
-import { calculateItemCost, calculateMargin, calculateTotalCost } from "./cost";
+import { calculateItemCost, calculateMarginCost, calculateTotalCost } from "./cost";
 
-export const printItems =(items: ItemType[], settings: Settings) => {
+export const printItems = (job: Job, settings: Settings) => {
+  const { isExtraMargin, items } = job;
+  const { extraMargin, saleTax, currency, margin } = settings;
+
   let printedText = '';
   let totalCost = 0;
   items.forEach((item) => {
-    let itemCost = calculateItemCost(item.cost, item.isExempt, settings.saleTax);
-    let margin = calculateMargin(item.cost, settings.margin, settings.isExtraMargin, settings.extraMargin);
-    printedText += `${item.name}: ${settings.currency} ${itemCost}`;
-    totalCost += calculateTotalCost(itemCost, margin)
+    let itemCost = calculateItemCost(item.cost, item.isExempt, saleTax);
+    let marginCost = calculateMarginCost(item.cost, margin, isExtraMargin, extraMargin);
+    printedText += `${item.name}: ${currency} ${itemCost}`;
+    totalCost += calculateTotalCost(itemCost, marginCost)
   });
-  printedText += `total: ${settings.currency} ${Number(totalCost).toFixed(2)}`
+  printedText += `total: ${currency} ${Number(totalCost).toFixed(2)}`
   return printedText;
 };

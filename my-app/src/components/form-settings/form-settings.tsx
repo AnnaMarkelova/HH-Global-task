@@ -1,19 +1,14 @@
 import { Settings } from "../../types/settings";
 
-type FormDataProps = {
+type FormSettingsProps = {
   settings: Settings;
   setSetting: (newValue: Settings) => void;
-  printedFormActive: boolean;
-  setPrintedFormActive: (newValue: boolean) => void;
 }
 
-const FormData: React.FunctionComponent<FormDataProps> = ({ settings, setSetting, printedFormActive, setPrintedFormActive }) => {
+const FormSettings: React.FunctionComponent<FormSettingsProps> = ({ settings, setSetting }) => {
 
   const onFormDataChange = (formData: Settings) => {
     setSetting(formData);
-    if (printedFormActive) {
-      setPrintedFormActive(false);
-    }
   }
 
   return (
@@ -31,16 +26,6 @@ const FormData: React.FunctionComponent<FormDataProps> = ({ settings, setSetting
         />
       </p>
       <p>
-        {/* <label htmlFor="IsExtraMargin">Extra margin</label>
-        <input
-          type={'checkbox'}
-          id="IsExtraMargin"
-          checked={settings.isExtraMargin}
-          onChange={(evt) => {
-            const { checked } = evt.target;
-            onFormDataChange({ ...settings, isExtraMargin: checked });
-          }}
-        /> */}
         <label htmlFor="ExtraMargin">Extra margin (rate)</label>
         <input
           id="ExtraMargin"
@@ -79,4 +64,4 @@ const FormData: React.FunctionComponent<FormDataProps> = ({ settings, setSetting
   )
 }
 
-export default FormData
+export default FormSettings

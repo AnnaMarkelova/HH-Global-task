@@ -1,12 +1,38 @@
+import { UseItemsContext } from "../../contexts/items-context";
+import { UsePrintContext } from "../../contexts/print-context";
 import { ItemType } from "../../types/item-type";
 
 type ItemProps = {
   item: ItemType;
-  onDeleteButtonClick: (deletedItem: ItemType) => void;
-  onEditItem: (item: ItemType, editedItem: ItemType) => void;
 }
 
-const Item: React.FunctionComponent<ItemProps> = ({ item, onDeleteButtonClick, onEditItem }) => {
+const Item: React.FunctionComponent<ItemProps> = ({ item }) => {
+
+  const { items, setItems } = UseItemsContext();
+  const { printedFormActive, setPrintedFormActive } = UsePrintContext();
+
+  const onDeleteButtonClick = (deletedItem: ItemType) => {
+    setItems(items.filter((item) => item.id !== deletedItem.id));
+    disablePrintForm();
+  };
+
+  const onEditItem = (editedItem: ItemType) => {
+    const editedItemsList = items.map((item) => {
+      if (item.id === editedItem.id) {
+        return editedItem;
+      }
+      return item;
+     })
+
+    setItems(editedItemsList);
+    disablePrintForm();
+  };
+
+  const disablePrintForm = () => {
+    if (printedFormActive) {
+      setPrintedFormActive(false);
+    }
+  }
 
   return (
     <ul>
@@ -14,7 +40,7 @@ const Item: React.FunctionComponent<ItemProps> = ({ item, onDeleteButtonClick, o
         value={item.name}
         onChange={(evt) => {
           const { value } = evt.target;
-          onEditItem(item, { ...item, name: value })
+          onEditItem({ ...item, name: value })
         }}
       />
       <input
@@ -22,7 +48,7 @@ const Item: React.FunctionComponent<ItemProps> = ({ item, onDeleteButtonClick, o
         type={'number'}
         onChange={(evt) => {
           const { value } = evt.target;
-          onEditItem(item, { ...item, cost: Number(value) })
+          onEditItem({ ...item, cost: Number(value) })
         }}
       />
       <input
@@ -30,7 +56,7 @@ const Item: React.FunctionComponent<ItemProps> = ({ item, onDeleteButtonClick, o
         checked={item.isExempt}
         onChange={(evt) => {
           const { checked } = evt.target;
-          onEditItem(item, { ...item, isExempt: checked })
+          onEditItem({ ...item, isExempt: checked })
         }}
       />
       <button

@@ -1,16 +1,43 @@
-import { ItemType } from "../../types/item-type";
+import { nanoid } from 'nanoid';
+import { UseItemsContext } from "../../contexts/items-context";
+import { UsePrintContext } from "../../contexts/print-context";
+import { ITEM_DEFAULT } from '../../types/item-type';
 import Item from "../item/item";
 
-type ListOfItemsProps = {
-  items: ItemType[];
-  onDeleteButtonClick: (deletedItem: ItemType)=> void;
-  onEditItem: (item:ItemType, editedItem: ItemType)=> void;
-}
+const ItemsList: React.FunctionComponent = () => {
 
-const ListOfItems: React.FunctionComponent<ListOfItemsProps> = ({ items, onDeleteButtonClick, onEditItem }) => {
+  const { items, setItems } = UseItemsContext();
+  const { setPrintedItems, printedFormActive, setPrintedFormActive } = UsePrintContext();
+
+  const onAddButtonClick = () => {
+    setItems([...items, { ...ITEM_DEFAULT, id: nanoid() }]);
+    disablePrintForm();
+  };
+
+  const onClearButtonClick = () => {
+    setPrintedItems('');
+    setItems([]);
+    disablePrintForm();
+  };
+
+  const disablePrintForm = () => {
+    if (printedFormActive) {
+      setPrintedFormActive(false);
+    }
+  }
 
   return (
     <>
+      <button
+        onClick={() => onAddButtonClick()}
+      >
+        Add
+      </button>
+      <button
+        onClick={() => onClearButtonClick()}
+      >
+        Clear
+      </button>
       <div>
         <p>Item</p>
         <p>Cost</p>
@@ -20,12 +47,10 @@ const ListOfItems: React.FunctionComponent<ListOfItemsProps> = ({ items, onDelet
         {items.map((item) => (
           <Item
             item={item}
-            onDeleteButtonClick={onDeleteButtonClick}
-            onEditItem={onEditItem}
           />))}
       </li>
     </>
   )
 }
 
-export default ListOfItems
+export default ItemsList

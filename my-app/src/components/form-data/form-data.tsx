@@ -1,19 +1,23 @@
+import { UsePrintContext } from '../../contexts/print-context';
+import { UseUserSettingContext } from '../../contexts/user-setting-context';
 import { UserSetting } from "../../types/user-setting-type";
 
-type FormDataProps = {
-  userSetting: UserSetting;
-  onFormDataChange: (formData: UserSetting) => void;
-  onAddButtonClick: () => void;
-  onClearButtonClick: () => void;
-  onPrintButtonClick: () => void;
-}
+const FormData: React.FunctionComponent = () => {
 
-const FormData: React.FunctionComponent<FormDataProps> = ({ userSetting, onFormDataChange, onAddButtonClick, onClearButtonClick, onPrintButtonClick }) => {
+  const { userSetting, setUserSetting } = UseUserSettingContext();
+  const { printedFormActive, setPrintedFormActive } = UsePrintContext();
+
+  const onFormDataChange = (formData: UserSetting) => {
+    setUserSetting(formData);
+    if (printedFormActive) {
+      setPrintedFormActive(false);
+    }
+  }
 
   return (
     <fieldset>
       <p>
-        <label htmlFor="Margin">{'Margin (rate)'}</label>
+        <label htmlFor="Margin">Margin (rate)</label>
         <input
           id="Margin"
           type={'number'}
@@ -70,21 +74,6 @@ const FormData: React.FunctionComponent<FormDataProps> = ({ userSetting, onFormD
           }}
         />
       </p>
-      <button
-        onClick={() => onAddButtonClick()}
-      >
-        Add
-      </button>
-      <button
-        onClick={() => onClearButtonClick()}
-      >
-        Clear
-      </button>
-      <button
-        onClick={() => onPrintButtonClick()}
-      >
-        Print
-      </button>
     </fieldset>
   )
 }

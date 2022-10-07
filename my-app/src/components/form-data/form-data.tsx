@@ -1,14 +1,16 @@
-import { UsePrintContext } from '../../contexts/print-context';
-import { UseUserSettingContext } from '../../contexts/user-setting-context';
-import { UserSetting } from "../../types/user-setting-type";
+import { Settings } from "../../types/settings";
 
-const FormData: React.FunctionComponent = () => {
+type FormDataProps = {
+  settings: Settings;
+  setSetting: (newValue: Settings) => void;
+  printedFormActive: boolean;
+  setPrintedFormActive: (newValue: boolean) => void;
+}
 
-  const { userSetting, setUserSetting } = UseUserSettingContext();
-  const { printedFormActive, setPrintedFormActive } = UsePrintContext();
+const FormData: React.FunctionComponent<FormDataProps> = ({ settings, setSetting, printedFormActive, setPrintedFormActive }) => {
 
-  const onFormDataChange = (formData: UserSetting) => {
-    setUserSetting(formData);
+  const onFormDataChange = (formData: Settings) => {
+    setSetting(formData);
     if (printedFormActive) {
       setPrintedFormActive(false);
     }
@@ -17,60 +19,59 @@ const FormData: React.FunctionComponent = () => {
   return (
     <fieldset>
       <p>
-        <label htmlFor="Margin">Margin (rate)</label>
+        <label htmlFor="Margin">Margin (rate) </label>
         <input
           id="Margin"
           type={'number'}
-          value={userSetting.margin}
+          value={settings.margin}
           onChange={(evt) => {
             const { value } = evt.target;
-            onFormDataChange({ ...userSetting, margin: Number(value) });
+            onFormDataChange({ ...settings, margin: Number(value) });
           }}
         />
       </p>
       <p>
-        <label htmlFor="IsExtraMargin">Extra margin</label>
+        {/* <label htmlFor="IsExtraMargin">Extra margin</label>
         <input
           type={'checkbox'}
           id="IsExtraMargin"
-          checked={userSetting.isExtraMargin}
+          checked={settings.isExtraMargin}
           onChange={(evt) => {
             const { checked } = evt.target;
-            onFormDataChange({ ...userSetting, isExtraMargin: checked });
+            onFormDataChange({ ...settings, isExtraMargin: checked });
           }}
-        />
-        <label htmlFor="ExtraMargin">{'(rate)'}</label>
+        /> */}
+        <label htmlFor="ExtraMargin">Extra margin (rate)</label>
         <input
           id="ExtraMargin"
           type={'number'}
-          value={userSetting.extraMargin}
+          value={settings.extraMargin}
           onChange={(evt) => {
             const { value } = evt.target;
-            onFormDataChange({ ...userSetting, extraMargin: Number(value) });
+            onFormDataChange({ ...settings, extraMargin: Number(value) });
           }}
-          disabled={userSetting.isExtraMargin === false}
         />
       </p>
       <p>
-        <label htmlFor="SaleTax">{'Sale tax'}</label>
+        <label htmlFor="SaleTax">Sale tax</label>
         <input
           id="SaleTax"
           type={'number'}
-          value={userSetting.saleTax}
+          value={settings.saleTax}
           onChange={(evt) => {
             const { value } = evt.target;
-            onFormDataChange({ ...userSetting, saleTax: Number(value) });
+            onFormDataChange({ ...settings, saleTax: Number(value) });
           }}
         />
       </p>
       <p>
-        <label htmlFor="Currency">{'Currency'}</label>
+        <label htmlFor="Currency">Currency</label>
         <input
           id="Currency"
-          value={userSetting.currency}
+          value={settings.currency}
           onChange={(evt) => {
             const { value } = evt.target;
-            onFormDataChange({ ...userSetting, currency: value });
+            onFormDataChange({ ...settings, currency: value });
           }}
         />
       </p>

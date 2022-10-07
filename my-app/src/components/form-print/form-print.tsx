@@ -1,16 +1,27 @@
-import { UseItemsContext } from '../../contexts/items-context';
-import { UsePrintContext } from '../../contexts/print-context';
-import { UseUserSettingContext } from '../../contexts/user-setting-context';
-import { printItems } from '../../utils/print-utils';
+import { ItemType } from '../../types/item';
+import { Settings } from '../../types/settings';
+import { printItems } from '../../utils/print';
 
-const FormPrint: React.FunctionComponent = () => {
+type FormPrintProps = {
+  items: ItemType[];
+  settings: Settings;
+  printedItems: string;
+  setPrintedItems: (newValue: string) => void;
+  printedFormActive: boolean;
+  setPrintedFormActive: (newValue: boolean) => void;
+}
 
-  const { items } = UseItemsContext();
-  const { userSetting } = UseUserSettingContext();
-  const { printedItems, setPrintedItems, printedFormActive, setPrintedFormActive } = UsePrintContext();
+const FormPrint: React.FunctionComponent<FormPrintProps> = ({
+    items,
+    settings,
+    printedItems,
+    setPrintedItems,
+    printedFormActive,
+    setPrintedFormActive 
+  }) => {
 
   const onPrintButtonClick = () => {
-    const printedItems = printItems(items, userSetting)
+    const printedItems = printItems(items, settings)
     setPrintedItems(printedItems);
     setPrintedFormActive(true);
   }

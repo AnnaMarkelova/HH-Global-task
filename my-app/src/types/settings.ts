@@ -1,4 +1,4 @@
-export type UserSetting = {
+export type Settings = {
     isExtraMargin: boolean
     extraMargin: number
     margin: number
@@ -6,7 +6,7 @@ export type UserSetting = {
     currency: string
 }
 
-export const USER_SETTING_DEFAULT: UserSetting =  {
+export const SETTINGS_DEFAULT: Settings =  {
   isExtraMargin: false,
   extraMargin: 5,
   margin: 11,

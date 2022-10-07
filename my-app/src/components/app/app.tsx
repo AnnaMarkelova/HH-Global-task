@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
-import { ItemType } from '../../types/item-type';
-import { UserSetting, USER_SETTING_DEFAULT, } from '../../types/user-setting-type';
+import { ItemType } from '../../types/item';
+import { Settings, SETTINGS_DEFAULT, } from '../../types/settings';
 import FormData from '../form-data/form-data';
-import ItemsList from '../list-of-items/list-of-items';
-import { ItemsContextProvider } from '../../contexts/items-context';
-import { UserSettingContextProvider } from '../../contexts/user-setting-context';
-import { PrintContextProvider } from '../../contexts/print-context';
+import ItemList from '../item-list/item-list';
 import FormPrint from '../form-print/form-print';
 
 const App: React.FunctionComponent = () => {
@@ -13,24 +10,8 @@ const App: React.FunctionComponent = () => {
   const [printedItems, setPrintedItems] = useState('');
   const [printedFormActive, setPrintedFormActive] = useState(false);
   const [items, setItems] = useState<ItemType[]>([]);
-  const [userSetting, setUserSetting] = useState<UserSetting>(USER_SETTING_DEFAULT);
-
-  const itemsStore = {
-    items,
-    setItems
-  }
-
-  const userSettingStore = {
-    userSetting,
-    setUserSetting,
-  }
-
-  const printedItemsStore = {
-    printedItems,
-    setPrintedItems,
-    printedFormActive,
-    setPrintedFormActive
-  }
+  const [settings, setSettings] = useState<Settings>(SETTINGS_DEFAULT);
+  const [extraMarginActive, setExtraMarginActive] = useState(false);
 
   return (
     <>
@@ -38,15 +19,29 @@ const App: React.FunctionComponent = () => {
       </header>
       <main>
         <h1>InnerWorkings</h1>
-        <ItemsContextProvider value={itemsStore}>
-          <UserSettingContextProvider value={userSettingStore}>
-            <PrintContextProvider value={printedItemsStore}>
-              <FormData />
-              <ItemsList />
-              <FormPrint />
-            </PrintContextProvider>
-          </UserSettingContextProvider>
-        </ItemsContextProvider>
+        <FormData
+          settings={settings}
+          setSetting={setSettings}
+          printedFormActive={printedFormActive}
+          setPrintedFormActive={setPrintedFormActive}
+        />
+        <ItemList
+          items={items}
+          setItems={setItems}
+          setPrintedItems={setPrintedItems}
+          printedFormActive={printedFormActive}
+          setPrintedFormActive={setPrintedFormActive}
+          extraMarginActive={extraMarginActive}
+          setExtraMarginActive={setExtraMarginActive}
+        />
+        <FormPrint
+          items={items}
+          settings={settings}
+          printedItems={printedItems}
+          setPrintedItems={setPrintedItems}
+          printedFormActive={printedFormActive}
+          setPrintedFormActive={setPrintedFormActive}
+        />
       </main>
       <footer>
       </footer>

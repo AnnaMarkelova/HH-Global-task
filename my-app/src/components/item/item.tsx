@@ -1,38 +1,12 @@
-import { UseItemsContext } from "../../contexts/items-context";
-import { UsePrintContext } from "../../contexts/print-context";
-import { ItemType } from "../../types/item-type";
+import { ItemType } from '../../types/item';
 
 type ItemProps = {
   item: ItemType;
+  onDeleteButtonClick: (newValue: ItemType) => void;
+  onEditItem: (newValue: ItemType) => void;
 }
 
-const Item: React.FunctionComponent<ItemProps> = ({ item }) => {
-
-  const { items, setItems } = UseItemsContext();
-  const { printedFormActive, setPrintedFormActive } = UsePrintContext();
-
-  const onDeleteButtonClick = (deletedItem: ItemType) => {
-    setItems(items.filter((item) => item.id !== deletedItem.id));
-    disablePrintForm();
-  };
-
-  const onEditItem = (editedItem: ItemType) => {
-    const editedItemsList = items.map((item) => {
-      if (item.id === editedItem.id) {
-        return editedItem;
-      }
-      return item;
-     })
-
-    setItems(editedItemsList);
-    disablePrintForm();
-  };
-
-  const disablePrintForm = () => {
-    if (printedFormActive) {
-      setPrintedFormActive(false);
-    }
-  }
+const Item: React.FunctionComponent<ItemProps> = ({ item, onDeleteButtonClick, onEditItem }) => {
 
   return (
     <ul>

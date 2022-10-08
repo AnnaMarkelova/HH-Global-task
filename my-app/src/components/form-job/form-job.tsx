@@ -5,25 +5,29 @@ import JobItemList from '../job-item-list/job-item-list';
 
 type FormJobProps = {
   job: Job;
-  setJob: (newValue: Job) => void;
+  setJob: React.Dispatch<React.SetStateAction<Job>>;
 }
 
 const FormJob: React.FunctionComponent<FormJobProps> = ({ job, setJob }) => {
 
-  const { isExtraMargin, items } = job;
+  const { isExtraMargin } = job;
 
   const onAddButtonClick = () => {
-    setJob({
-      isExtraMargin: isExtraMargin,
-      items: [...items, { ...ITEM_DEFAULT, id: nanoid() }]
-    });
+    setJob((prevJob: Job) => {
+      return {
+        isExtraMargin: prevJob.isExtraMargin,
+        items: [...prevJob.items, { ...ITEM_DEFAULT, id: nanoid() }]
+      }
+    })
   };
 
   const onClearButtonClick = () => {
-    setJob({
-      isExtraMargin: isExtraMargin,
-      items: []
-    });
+    setJob((prevJob: Job) => {
+      return {
+        isExtraMargin: prevJob.isExtraMargin,
+        items: []
+      }
+    })
   };
 
   return (
@@ -35,9 +39,11 @@ const FormJob: React.FunctionComponent<FormJobProps> = ({ job, setJob }) => {
         checked={isExtraMargin}
         onChange={(evt) => {
           const { checked } = evt.target;
-          setJob({
-            isExtraMargin: checked,
-            items
+          setJob((prevJob: Job) => {
+            return {
+              isExtraMargin: checked,
+              items: prevJob.items
+            }
           });
         }}
       />

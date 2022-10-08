@@ -2,13 +2,15 @@ import { Settings } from "../../types/settings";
 
 type FormSettingsProps = {
   settings: Settings;
-  setSetting: (newValue: Settings) => void;
+  setSetting: React.Dispatch<React.SetStateAction<Settings>>;
 }
 
 const FormSettings: React.FunctionComponent<FormSettingsProps> = ({ settings, setSetting }) => {
 
-  const onFormDataChange = (formData: Settings) => {
-    setSetting(formData);
+  const onFormDataChange = (propName: keyof Settings, propValue: number | string) => {
+    setSetting((prevSettings) => {
+      return {...prevSettings, [propName]: propValue }
+    });
   }
 
   return (
@@ -21,7 +23,7 @@ const FormSettings: React.FunctionComponent<FormSettingsProps> = ({ settings, se
           value={settings.margin}
           onChange={(evt) => {
             const { value } = evt.target;
-            onFormDataChange({ ...settings, margin: Number(value) });
+            onFormDataChange('margin', Number(value));
           }}
         />
       </p>
@@ -33,7 +35,7 @@ const FormSettings: React.FunctionComponent<FormSettingsProps> = ({ settings, se
           value={settings.extraMargin}
           onChange={(evt) => {
             const { value } = evt.target;
-            onFormDataChange({ ...settings, extraMargin: Number(value) });
+            onFormDataChange('extraMargin', Number(value));
           }}
         />
       </p>
@@ -45,7 +47,7 @@ const FormSettings: React.FunctionComponent<FormSettingsProps> = ({ settings, se
           value={settings.saleTax}
           onChange={(evt) => {
             const { value } = evt.target;
-            onFormDataChange({ ...settings, saleTax: Number(value) });
+            onFormDataChange('saleTax', Number(value));
           }}
         />
       </p>
@@ -56,7 +58,7 @@ const FormSettings: React.FunctionComponent<FormSettingsProps> = ({ settings, se
           value={settings.currency}
           onChange={(evt) => {
             const { value } = evt.target;
-            onFormDataChange({ ...settings, currency: value });
+            onFormDataChange('currency', value);
           }}
         />
       </p>

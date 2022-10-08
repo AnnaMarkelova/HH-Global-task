@@ -4,30 +4,38 @@ import JobItem from '../job-item/job-item';
 
 type JobItemListProps = {
   job: Job;
-  setJob: (newValue: Job) => void;
+  setJob: React.Dispatch<React.SetStateAction<Job>>;
 }
 
 const JobItemList: React.FunctionComponent<JobItemListProps> = ({ job, setJob }) => {
 
-  const { isExtraMargin, items } = job;
+  const { items } = job;
 
   const onDeleteButtonClick = (deletedItem: Item) => {
-    setJob({
-      isExtraMargin: isExtraMargin,
-      items: items.filter((item) => item.id !== deletedItem.id)
+    setJob((prevJob: Job) => {
+      return {
+        isExtraMargin: prevJob.isExtraMargin,
+        items: prevJob.items.filter((item) => item.id !== deletedItem.id)
+      }
     });
   };
 
   const onEditItem = (editedItem: Item) => {
-    const editedItemsList = items.map((item) => {
-      if (item.id === editedItem.id) {
-        return editedItem;
+
+    const getNewItemList = (currentItems: Item[]) => {
+      return currentItems.map((item) => {
+        if (item.id === editedItem.id) {
+          return editedItem;
+        }
+        return item;
+      });
+    };
+
+    setJob((prevJob: Job) => {
+      return {
+        isExtraMargin: prevJob.isExtraMargin,
+        items: getNewItemList(prevJob.items) 
       }
-      return item;
-    })
-    setJob({
-      isExtraMargin: isExtraMargin,
-      items: editedItemsList
     });
   };
 
@@ -41,6 +49,7 @@ const JobItemList: React.FunctionComponent<JobItemListProps> = ({ job, setJob })
       <li>
         {items.map((item) => (
           <JobItem
+            key={item.id}
             item={item}
             onDeleteButtonClick={onDeleteButtonClick}
             onEditItem={onEditItem}

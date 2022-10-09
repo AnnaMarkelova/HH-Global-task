@@ -40,13 +40,14 @@ const JobItemList: React.FunctionComponent<JobItemListProps> = ({ job, setJob })
   };
 
   return (
-    <>
-      <div>
-        <p>Item</p>
-        <p>Cost</p>
-        <p>Exempt</p>
+    <div className='form-job__list-container'>
+      <div className='form-job__container'>
+        <p className='form-job__column'>Item</p>
+        <p className='form-job__column'>Cost</p>
+        <p className='form-job__column'>Exempt</p>
+        <p className='form-job__column'></p>
       </div>
-      <li>
+      <li className='form-job__list'>
         {items.map((item) => (
           <JobItem
             key={item.id}
@@ -55,7 +56,7 @@ const JobItemList: React.FunctionComponent<JobItemListProps> = ({ job, setJob })
             onEditItem={onEditItem}
           />))}
       </li>
-    </>
+    </div>
   )
 }
 

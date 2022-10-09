@@ -31,37 +31,41 @@ const FormJob: React.FunctionComponent<FormJobProps> = ({ job, setJob }) => {
   };
 
   return (
-    <>
-      <label htmlFor="IsExtraMargin">Extra margin</label>
-      <input
-        type={'checkbox'}
-        id="IsExtraMargin"
-        checked={isExtraMargin}
-        onChange={(evt) => {
-          const { checked } = evt.target;
-          setJob((prevJob: Job) => {
-            return {
-              isExtraMargin: checked,
-              items: prevJob.items
-            }
-          });
-        }}
-      />
-      <button
-        onClick={() => onAddButtonClick()}
-      >
-        Add
-      </button>
-      <button
-        onClick={() => onClearButtonClick()}
-      >
-        Clear
-      </button>
+    <div className='form-job'>
+      <div className='form-job__panel'>
+        <button
+          className='form-job__panel-button button__style'
+          onClick={() => onAddButtonClick()}
+        >
+          Add
+        </button>
+        <button
+          className='form-job__panel-button button__style'
+          onClick={() => onClearButtonClick()}
+        >
+          Clear
+        </button>
+        <label htmlFor="IsExtraMargin">Extra margin</label>
+        <input
+          type='checkbox'
+          id="IsExtraMargin"
+          checked={isExtraMargin}
+          onChange={(evt) => {
+            const { checked } = evt.target;
+            setJob((prevJob: Job) => {
+              return {
+                isExtraMargin: checked,
+                items: prevJob.items
+              }
+            });
+          }}
+        />
+      </div>
       <JobItemList
         job={job}
         setJob={setJob}
       />
-    </>
+    </div>
   )
 }
 

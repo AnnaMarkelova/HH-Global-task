@@ -15,25 +15,23 @@ const App: React.FunctionComponent = () => {
 
   return (
     <>
-      <header>
-      </header>
-      <main>
-        <h1>InnerWorkings</h1>
+      <main className='main wrapper'>
+        <h1 className='title'>Cost calculator</h1>
         <FormSettings
           settings={settings}
           setSetting={setSettings}
         />
-        <FormJob
-          job={job}
-          setJob={setJob}
-        />
-        <FormPrint
-          job={job}
-          settings={settings}
-        />
+        <div className='data-block wrapper'>
+          <FormJob
+            job={job}
+            setJob={setJob}
+          />
+          <FormPrint
+            job={job}
+            settings={settings}
+          />
+        </div>
       </main>
-      <footer>
-      </footer>
     </>
   );
 }

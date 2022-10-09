@@ -11,9 +11,9 @@ export const printItems = (job: Job, settings: Settings) => {
   items.forEach((item) => {
     let itemCost = calculateItemCost(item.cost, item.isExempt, saleTax);
     let marginCost = calculateMarginCost(item.cost, margin, isExtraMargin, extraMargin);
-    printedText += `${item.name}: ${currency} ${itemCost}`;
+    printedText += `${item.name}: ${currency} ${itemCost} \n`;
     totalCost += calculateTotalCost(itemCost, marginCost)
   });
-  printedText += `total: ${currency} ${Number(totalCost).toFixed(2)}`
+  printedText += `total: ${currency} ${Number(totalCost).toFixed(2)} \n`
   return printedText;
 };

@@ -5,9 +5,161 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: white
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.wrapper {
+  margin: 0 auto;
+  width: 850px;
+}
+
+.main {
+  margin-top: 20px;
+  border-radius: 10px;
+  background-color: whitesmoke;
+}
+
+.title {
+  text-align: center;
+  margin: 0;
+  padding: 15px 0;
+}
+
+.form-setting {
+  width: 800px;
+  min-height: 200px;
+  border-radius: 10px;
+  background-color: rgba(20, 10, 100, 0.6);
+}
+
+.form-setting__title {
+  margin: 0;
+  margin-left: 20px;
+  padding-top: 15px;
+  color: white;
+}
+
+.form-setting__label {
+  width: 150px;
+  color: white;
+}
+
+.form-setting__input {
+  width: 40px;
+}
+
+.form-setting__input-block {
+  display: flex;
+  margin: 15px 20px;
+}
+
+.data-block {
+  display: grid;
+  width: 800px;
+  grid-template-columns: 320px 1fr
+}
+
+.form-job__panel {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.button__style {
+  padding: 3px 9px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  color: white;
+  background-color: rgba(20, 10, 100, 0.6);
+  cursor: pointer;
+}
+
+.button__style:hover {
+  background-color: rgba(20, 10, 100, 0.8);
+}
+
+.form-job__panel-button {
+  margin-right: 15px;
+}
+
+.form-job__container {
+  display: grid;
+  grid-template-columns: 100px 100px 65px 20px;
+}
+
+.form-job__list-container {
+  margin-bottom: 15px;
+  width: 285px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.form-job__column {
+  box-sizing: border-box;
+  margin: 0;
+  padding-left: 10px;
+  color: white;
+  background-color: rgba(20, 10, 100, 0.6);
+}
+
+.form-job__list {
+  list-style: none;
+  background-color: white;
+}
+
+.form-job__input {
+  padding-left: 10px;
+  border-width: 0px 1px 0px 0px;
+  border-style: solid;
+  border-color: gray;
+}
+
+.form-job__item {
+  padding: 0;
+  margin: 0;
+}
+
+.form-job__btn-delete-container {
+  display: flex;
+  justify-content: center;
+}
+
+.form-job__btn-delete {
+  padding: 0;
+  width: 15px;
+  height: 15px;
+  border: none;
+  background-color: rgba(220, 220, 220, 0.6);
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.form-job__btn-delete:hover {
+  background-color: rgba(220, 220, 220, 1);
+}
+
+.form-print {
+  margin-bottom: 15px;
+  display: grid;
+  grid-template-rows: 50px 1fr;
+}
+
+.form-print__button {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  width: 50px;
+  cursor: pointer;
+}
+
+.form-print__printed-items {
+  margin: 0;
+  min-height: 200px;
+  background-color: white;
+  border-radius: 10px;
+  white-space: pre-line;
+  overflow: hidden;
+}
+
+.form-print__printed-items_inactive {
+  color: gray;
 }

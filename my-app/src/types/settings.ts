@@ -9,5 +9,5 @@ export const SETTINGS_DEFAULT: Settings =  {
   extraMargin: 5,
   margin: 11,
   saleTax: 7,
-  currency: 'USD'
+  currency: '$'
 }

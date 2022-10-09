@@ -26,20 +26,20 @@ const FormPrint: React.FunctionComponent<FormPrintProps> = ({ job, settings }) =
     setPrintedFormActive(true);
   }
 
+  const inactiveClass = printedFormActive ? '' : 'form-print__printed-items_inactive';
+
   return (
-    <>
+    <div className='form-print'>
       <button
+      className='form-print__button button__style'
         onClick={() => onPrintButtonClick()}
       >
         Print
       </button>
-      <p>
-        'Is active': {printedFormActive ? 'true' : 'false'}
-      </p>
-      <p>
+      <p className={`form-print__printed-items ${inactiveClass}`}>
         {printedItems}
       </p>
-    </>
+    </div>
 
   )
 }

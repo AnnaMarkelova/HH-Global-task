@@ -9,51 +9,31 @@ const FormSettings: React.FunctionComponent<FormSettingsProps> = ({ settings, se
 
   const onFormDataChange = (propName: keyof Settings, propValue: number | string) => {
     setSetting((prevSettings) => {
-      return {...prevSettings, [propName]: propValue }
+      return { ...prevSettings, [propName]: propValue }
     });
   }
 
   return (
-    <fieldset>
-      <p>
-        <label htmlFor="Margin">Margin (rate) </label>
+    <div className='wrapper form-setting'>
+      <h2 className='form-setting__title'>Settings</h2>
+      <p className='form-setting__input-block'>
+        <label className='form-setting__label' htmlFor="SaleTax">Sale tax</label>
         <input
-          id="Margin"
-          type={'number'}
-          value={settings.margin}
-          onChange={(evt) => {
-            const { value } = evt.target;
-            onFormDataChange('margin', Number(value));
-          }}
-        />
-      </p>
-      <p>
-        <label htmlFor="ExtraMargin">Extra margin (rate)</label>
-        <input
-          id="ExtraMargin"
-          type={'number'}
-          value={settings.extraMargin}
-          onChange={(evt) => {
-            const { value } = evt.target;
-            onFormDataChange('extraMargin', Number(value));
-          }}
-        />
-      </p>
-      <p>
-        <label htmlFor="SaleTax">Sale tax</label>
-        <input
+          className='form-setting__input'
           id="SaleTax"
-          type={'number'}
+          type='number'
           value={settings.saleTax}
+          min='0'
           onChange={(evt) => {
             const { value } = evt.target;
             onFormDataChange('saleTax', Number(value));
           }}
         />
       </p>
-      <p>
-        <label htmlFor="Currency">Currency</label>
+      <p className='form-setting__input-block'>
+        <label className='form-setting__label' htmlFor="Currency">Currency</label>
         <input
+          className='form-setting__input'
           id="Currency"
           value={settings.currency}
           onChange={(evt) => {
@@ -62,7 +42,35 @@ const FormSettings: React.FunctionComponent<FormSettingsProps> = ({ settings, se
           }}
         />
       </p>
-    </fieldset>
+      <p className='form-setting__input-block'>
+        <label className='form-setting__label' htmlFor="Margin">Margin (rate) </label>
+        <input
+          className='form-setting__input'
+          id="Margin"
+          type='number'
+          value={settings.margin}
+          min='0'
+          onChange={(evt) => {
+            const { value } = evt.target;
+            onFormDataChange('margin', Number(value));
+          }}
+        />
+      </p>
+      <p className='form-setting__input-block'>
+        <label className='form-setting__label' htmlFor="ExtraMargin">Extra margin (rate)</label>
+        <input
+          className='form-setting__input'
+          id="ExtraMargin"
+          type='number'
+          value={settings.extraMargin}
+          min='0'
+          onChange={(evt) => {
+            const { value } = evt.target;
+            onFormDataChange('extraMargin', Number(value));
+          }}
+        />
+      </p>
+    </div>
   )
 }
 

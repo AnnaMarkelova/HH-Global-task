@@ -10,11 +10,11 @@ body {
 
 .wrapper {
   margin: 0 auto;
-  width: 850px;
 }
 
 .main {
   margin-top: 20px;
+  width: 850px;
   border-radius: 10px;
   background-color: whitesmoke;
 }
@@ -26,16 +26,15 @@ body {
 }
 
 .form-setting {
+  box-sizing: border-box;
+  padding: 15px;
   width: 800px;
-  min-height: 200px;
   border-radius: 10px;
   background-color: rgba(20, 10, 100, 0.6);
 }
 
 .form-setting__title {
   margin: 0;
-  margin-left: 20px;
-  padding-top: 15px;
   color: white;
 }
 
@@ -50,13 +49,15 @@ body {
 
 .form-setting__input-block {
   display: flex;
-  margin: 15px 20px;
+  margin: 0;
+  margin-top: 15px;
 }
 
 .data-block {
   display: grid;
+  grid-template-columns: 1fr 1fr;
   width: 800px;
-  grid-template-columns: 320px 1fr
+  gap: 20px;
 }
 
 .form-job__panel {
@@ -84,12 +85,11 @@ body {
 
 .form-job__container {
   display: grid;
-  grid-template-columns: 100px 100px 65px 20px;
+  grid-template-columns: 1fr 100px 65px 20px;
 }
 
 .form-job__list-container {
   margin-bottom: 15px;
-  width: 285px;
   border-radius: 10px;
   overflow: hidden;
 }
@@ -119,23 +119,15 @@ body {
   margin: 0;
 }
 
-.form-job__btn-delete-container {
-  display: flex;
-  justify-content: center;
-}
-
 .form-job__btn-delete {
   padding: 0;
-  width: 15px;
-  height: 15px;
   border: none;
-  background-color: rgba(220, 220, 220, 0.6);
-  border-radius: 25px;
+  background-color: white;
   cursor: pointer;
 }
 
-.form-job__btn-delete:hover {
-  background-color: rgba(220, 220, 220, 1);
+.form-job_icon-delete:hover {
+  fill: red;
 }
 
 .form-print {
@@ -145,9 +137,9 @@ body {
 }
 
 .form-print__button {
+  justify-self: start;
   margin-top: 15px;
   margin-bottom: 15px;
-  width: 50px;
   cursor: pointer;
 }
 
